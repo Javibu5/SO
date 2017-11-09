@@ -17,18 +17,20 @@ void * Suma(char nom[15]){
 
 int *x = (int *)malloc(sizeof(int));
 
-FILE * f = fopen( , "r");
-char a;
+*x = 0;
+
+FILE * f = fopen(nom , "r");
+char a ; 
 a = fgetc(f);
 	while(a != EOF ){
 			if(a == '\n'){
-				fi.i++;
+				
 			}
 		a = fgetc(f);
 	}
 	printf("se hafg\n");
 	fclose(f);
-	*x = fi.i;
+
 	pthread_exit(x);
 }
 

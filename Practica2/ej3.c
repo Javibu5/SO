@@ -16,7 +16,7 @@ typedef struct {
 
 
 // Thread que incrementa n componentes de un array
-void * incrementer (subarray_t *arg) {
+void *incrementer (subarray_t * arg) {
 
    int *suma = (int *)malloc(sizeof(int));
    *suma = 0;
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	}
 
     srand(time(NULL));
-	int n = atoi(argv[1]);
+	int const n = atoi(argv[1]);
 	int *valor_devuelto;
     int ar [10]; 
     long suma=0,i;
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
         sv[i].n = neh;
         if(10%n != 0 && i == (n - 1)){
             
-    		pthread_create(&th[i], NULL, (void *)incrementer, &sv[i]);
+    		pthread_create(&th[i], NULL,(void*)incrementer, &sv[i]);
         }
     		
     }

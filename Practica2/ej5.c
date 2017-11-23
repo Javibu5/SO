@@ -8,20 +8,22 @@
 
 
 
-void * Calculo(int matrizFuncion[2][3]){
+void * Calculo(int * matrizFuncion[2][3]){
 	
 	int *x = (int *)malloc(sizeof(int));
-	*x = 0;
+	
 
 	int multiplicacion;
 
 	for (int i = 0; i < 3 ; ++i)
 	{
-		multiplicacion =  matrizFuncion[0][i] * matrizFuncion[1][i];
+		printf("%d\n", *matrizFuncion[0][i]);
+		printf("%d\n", *matrizFuncion[1][i]);
+		multiplicacion =  *matrizFuncion[0][i] * (*matrizFuncion[1][i]);
 		*x =+ multiplicacion;
 	}
 
-	printf("%d\n" , *x);
+
 	
 	pthread_exit(x);
 
@@ -35,31 +37,38 @@ int main()
 
 	int * suma;
 	int resultado = 0;
+	int vector[3];
 
 
 	
 	pthread_t thd[3];
 
 	for(int i = 0; i < 3 ; i++){
+		
+			
 		for (int j = 0; j < 3 ; ++j)
 		{
 			maux[0][j] = m[i][j];
-			maux[1][j] = v[i];
-			pthread_create (&thd[i], NULL, (void *) Calculo, &maux);
-		}
+			maux[1][j] = v[j];
 		
+		}
+
+		pthread_create (&thd[i], NULL, (void *) Calculo, &maux);
 	}
 
 	for(int j = 0 ; j<3 ; j++){
 		pthread_join(thd[j], (void **) &suma);
 		printf("El hilo %d ha devuelto el valor %d\n",j, *suma);
-		resultado =+ *suma;
+		vector[j] = *suma; 
+
+
 	}
+for (int k = 0; k < 3; ++k)
+{
+	printf("%d\n", vector[k]);
+	
+	
+}
 
-	printf("%d\n", resultado);
-	 pthread_exit(NULL);
-
-
-
-	return 0;
+		return 0;
 }

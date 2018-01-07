@@ -1,0 +1,9 @@
+linea 1 fichero de prueba
+linea 2 para el ejercicio 9
+linea 3 de la practica 2
+linea 4 de la asignatura SO
+linea 5 Sistemas Operativos (S.O)
+linea 6 se generaran copias identicas a este fichero
+linea 7 en esta misma carpeta
+linea 8 Autor:Adrián López Ortiz
+FIN

@@ -7,18 +7,7 @@
 #include <unistd.h>
 
 
-void *hiloMensaje (char *palabra){
-
-int largo = strlen(palabra);
-
-for (int i = 0; i < largo; ++i)
-{
-printf("%c \n", palabra[i] );
-sleep(1);
-}
-
-
-}
+void *hiloMensaje (char *palabra);
 
 int main()
 {
@@ -40,6 +29,21 @@ pthread_join(thd1, NULL);
 
     exit(EXIT_SUCCESS); 
 
+
+
+}
+
+
+
+void *hiloMensaje (char *palabra){
+
+int largo = strlen(palabra);
+
+for (int i = 0; i < largo; ++i)
+{
+printf("%c \n", palabra[i] );
+sleep(1);
+}
 
 
 }

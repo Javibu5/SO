@@ -6,13 +6,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void * contador(int * a){
+struct cuentaHilos{
+	int contador;
+	int indice;
+};
 
-	for (int k = 0; k < 100; ++k)
-	{
-		(*a) = 1 + (*a);
-	}
-}
+
+void * contador(void * a);
 	
 
 
@@ -21,28 +21,41 @@ int main()
 {
 
 	int N;
-	int contador = 0;
 	pthread_t thd[100];
-
+	struct cuentaHilos c;
+	c.contador = 0;
 	printf("Dime el numero de hilos que quieres crear\n");
-	scanf("%d" , N);
+
+	scanf("%d" , &N);
 
 
 	
 
 	for (int i = 0; i < N; ++i)
 	{
-		printf("llega hasta aquiç\n");
-		pthread_create(&thd[N] , NULL , (void*) contador , &contador);
+		pthread_create(&thd[N] , NULL , (void*) contador , (void*)&c.contador);
+		
 	}
 
 	for (int j = 0; j < N; ++j)
 	{
-		pthread_join(thd[j], NULL);
+		pthread_join(thd[j], (void**) &c.contador );
+		printf("el contador %d :%d\n", j , c.contador );
 
 	}
 	
-	printf("El contador vale %d\n", contador);
+	printf("El contador vale %d\n", c.contador);
 	
 	return 0;
+}
+
+void * contador(void * a){
+	struct cuentaHilos *aux = (struct cuentaHilos *) a;
+	int i;
+	for (int i = 0; i<100; ++i)
+	{
+		aux->contador++;
+	}
+
+pthread_exit((void*)aux->contador);
 }
